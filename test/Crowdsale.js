@@ -77,4 +77,25 @@ const ether = tokens
     })
   })
 
+  describe('Sending ETH', ()=>{
+    let transaction, result
+    let amount = tokens(10)
+
+    describe('Success', () => {
+
+      beforeEach(async()=>{
+        transaction = await user1.sendTransaction({to: crowdsale.address, value: amount})
+        result = await transaction.wait()
+      })
+
+      it('transfers tokens', async ()=>{
+        expect(await ethers.provider.getBalance(crowdsale.address)).to.equal(amount)
+      })
+
+      it('transfers tokens', async ()=>{
+        expect(await token.balanceOf(user1.address)).to.equal(amount)
+      })
+
+      })
+    })
  })
