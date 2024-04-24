@@ -97,9 +97,9 @@ const ether = tokens
       })
 
       })
-    })
+  })
 
-    describe('Updating Price', ()=>{
+  describe('Updating Price', ()=>{
       let transaction, result
       let price = ether(2)
 
@@ -120,10 +120,10 @@ const ether = tokens
           await expect(crowdsale.connect(user1).setPrice(price)).to.be.reverted
         })
         })
-      })
+  })
 
   
-    describe('Finalizing Sale', ()=>{
+  describe('Finalizing Sale', ()=>{
       let transaction, result
       let amount = tokens(10)
       let value = ether(10)
@@ -149,12 +149,12 @@ const ether = tokens
       it('emits Finalize event', async ()=>{
         await expect(transaction).to.emit(crowdsale, "Finalize").withArgs(amount, value)
       })
+    })
 
       describe('Failure', ()=>{
         it('prevents non-owner from Finalizing', async ()=>{
           await expect(crowdsale.connect(user1).finalize()).to.be.reverted
         })
       })
-    })
   })
  })
