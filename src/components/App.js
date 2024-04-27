@@ -3,6 +3,7 @@ import {Container} from 'react-bootstrap'
 import {ethers} from 'ethers'
 
 import Navigation from "./Navigation";
+import Buy from "./Buy";
 import Info from "./Info"
 import Loading from "./Loading";
 import Progress from "./Progress";
@@ -43,13 +44,13 @@ function App(){
     setAccountBalance(accountBlanance)
 
     const price = ethers.utils.formatUnits(await crowdsale.price(), 18)
-    setPrice()
+    setPrice(price)
 
     const maxTokens = ethers.utils.formatUnits(await crowdsale.maxTokens(), 18)
-    setMaxTokens()
+    setMaxTokens(maxTokens)
 
     const tokensSold = ethers.utils.formatUnits(await crowdsale.tokensSold(), 18)
-    setTokensSold()
+    setTokensSold(tokensSold)
 
     setIsLoading(false)
 
@@ -74,6 +75,7 @@ function App(){
       ):(
         <>
         <p className="text-center"><strong>Current Price:</strong> {price}</p>
+        <Buy provider={provider} price={price} crowdsale={crowdsale} setIsLoading={setIsLoading} />
         <Progress maxTokens={maxTokens} tokensSold={tokensSold}/>
         </>
       )}
